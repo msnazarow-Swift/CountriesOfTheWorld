@@ -70,11 +70,11 @@ class CountryTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let country = countries[indexPath.row]
-        print("\(country.flag) \(indexPath)")
-    }
-    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let country = countries[indexPath.row]
+//        print("\(country.flag) \(indexPath)")
+//    }
+//    
     
 
     /*
@@ -144,12 +144,14 @@ class CountryTableViewController: UITableViewController {
     }
     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            
-         guard let indexPath = tableView.indexPathForSelectedRow else{ return }
-         let flag = countries[indexPath.row]
-         let navController = segue.destination as! UINavigationController
-         let addEditFlageTableViewController = navController.topViewController as! AddEditFlagTableViewController
-         addEditFlageTableViewController.flag = flag
+        
+        if segue.identifier == "EditFlag"{
+            let indexPath = tableView.indexPathForSelectedRow!
+            let flag = countries[indexPath.row]
+            let navController = segue.destination as! UINavigationController
+            let addEditFlageTableViewController = navController.topViewController as! AddEditFlagTableViewController
+            addEditFlageTableViewController.flag = flag
+        }
          // Get the new view controller using segue.destination.
          // Pass the selected object to the new view controller.
      }
